@@ -15,6 +15,8 @@ export default function Home() {
 			<main className={styles.main}>
 				<h1 className={styles.title}>Contoh Absensi Wasit</h1>
 				<Link href="/seminar">Ke Halaman Managemen</Link>
+				<Link href="/absen">Absensi</Link>
+				<Link href="/daftarUlang">Daftar Ulang</Link>
 
 				{/* <p className={styles.description}>
           Get started by editing{' '}

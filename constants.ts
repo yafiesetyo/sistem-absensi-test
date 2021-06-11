@@ -10,3 +10,8 @@ export const AbsenceStatus = {
 	NEW: 2,
 	PENDING: 3,
 };
+
+export const WasitStatus = {
+	NOT_ACTIVE: 0,
+	ACTIVE: 1,
+};

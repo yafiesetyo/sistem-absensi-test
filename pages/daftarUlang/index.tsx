@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import { GetServerSideProps } from "next";
+import { useRouter } from "next/router";
 import { Formik, Field, Form } from "formik";
 import axios from "axios";
 
@@ -31,28 +32,32 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	};
 };
 
-export default function Absen({ data, error }: any) {
+export default function DaftarUlang({ data, error }: any) {
+	const router = useRouter();
 	const handleSubmit = async (values: any) => {
 		try {
-			const response = await axios.post("/api/absen", values);
-			console.log(response.data);
+			const response = await axios.post("/api/absen/daftarUlang", values);
+			if (response.status === 200) {
+				router.push({
+					pathname: "/daftarUlang/token/[seminar_id]/[refee_id]",
+					query: { seminar_id: values.seminar_id, refee_id: values.refee_id },
+				});
+			}
 		} catch (error) {
-			console.log(error.response.data);
+			console.log(error);
 		}
 	};
-
 	return (
 		<div className="container">
 			<Head>
-				<title>Absen</title>
+				<title>Daftar Ulang Seminar</title>
 			</Head>
-			<h1>Absen Kehadiran</h1>
+			<h1>Daftar Ulang</h1>
 			<Formik
 				onSubmit={handleSubmit}
 				initialValues={{
 					seminar_id: data.seminar.result[0].id,
 					refee_id: data.wasit.result[0].id,
-					token: "",
 				}}>
 				<Form>
 					<div className="form-group">
@@ -86,10 +91,6 @@ export default function Absen({ data, error }: any) {
 									);
 								})}
 						</Field>
-					</div>
-					<div className="form-group">
-						<label>Token Absen</label>
-						<Field className="form-control" name="token" />
 					</div>
 
 					<div className="my-3">

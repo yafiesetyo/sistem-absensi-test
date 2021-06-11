@@ -4,6 +4,7 @@ import { SeminarStatus, AbsenceStatus } from "../../constants";
 import Seminar from "./seminar.model";
 import Wasit from "../wasit/wasit.model";
 import Absensi from "../absensi/absensi.model";
+import { Op } from "sequelize/types";
 
 export const Add = async (req: NextApiRequest, res: NextApiResponse) => {
 	let seminarId: any;
